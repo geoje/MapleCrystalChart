@@ -65,7 +65,7 @@ p {
 header {
   display: flex;
 }
-header > div {
+header > div:not(:last-child) {
   margin-right: 2rem;
 }
 
@@ -76,9 +76,28 @@ header > div {
 .card-title {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 200px;
+}
+.card-title > img {
+  margin-bottom: 0.5rem;
+}
+.card-title > l {
+  font-size: 0.8rem;
+}
+.card-title.upper > p,
+.card-title.upper > l {
+  color: #e74c3c;
+}
+.card-title.lower > p,
+.card-title.lower > l {
+  color: #3498db;
 }
 .card-chart {
   flex: 1;
+  height: 100px;
 }
 
 /******************** Mobile ********************/
