@@ -69,6 +69,12 @@ header > div:not(:last-child) {
   margin-right: 2rem;
 }
 
+section > h1 {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
 .card {
   display: flex;
   gap: 1rem;

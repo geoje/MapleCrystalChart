@@ -1,37 +1,99 @@
 [
-  {
-    "name": "이지 자쿰",
-    "icon": "image/icon/Zakum.png",
-    "image": "image/background/Zakum.png",
-    "labels": ["8/12", "8/19"],
-    "data": [200000, 196723]
-  },
-  {
-    "name": "노멀 자쿰",
-    "icon": "image/icon/Papulatus.png",
-    "image": "image/background/Papulatus.png",
-    "labels": ["8/12", "8/19"],
-    "data": [612500, 602463]
-  },
-  {
-    "name": "이지 파풀라투스",
-    "icon": "image/icon/Zakum.png",
-    "image": "image/background/Zakum.png",
-    "labels": ["8/12", "8/19"],
-    "data": [684500, 673283]
-  },
-  {
-    "name": "이지 매그너스",
-    "icon": "image/icon/Magnus.png",
-    "image": "image/background/Magnus.png",
-    "labels": ["8/12", "8/19"],
-    "data": [722000, 710169]
-  },
-  {
-    "name": "노멀 힐라",
-    "icon": "image/icon/Hilla.png",
-    "image": "image/background/Hilla.png",
-    "labels": ["8/12", "8/19"],
-    "data": [800000, 786891]
-  }
+  [
+    {
+      "name": ["이지 자쿰", "Zakum"],
+      "data": [200000, 196723]
+    },
+    {
+      "name": ["노멀 자쿰", "Zakum"],
+      "data": [612500, 602463]
+    },
+    {
+      "name": ["이지 파풀라투스", "Papulatus"],
+      "data": [684500, 673283]
+    },
+    {
+      "name": ["이지 매그너스", "Magnus"],
+      "data": [722000, 710169]
+    },
+    {
+      "name": ["노멀 힐라", "Hilla"],
+      "data": [800000, 786891]
+    },
+    {
+      "name": ["이지 혼테일", "Horntail"],
+      "data": [882000, 867547]
+    },
+    {
+      "name": ["노멀 반반", "VonBon"],
+      "data": [968000, 952138]
+    },
+    {
+      "name": ["노멀 피에르", "Pierre"],
+      "data": [968000, 952138]
+    },
+    {
+      "name": ["노멀 블러디퀸", "Queen"],
+      "data": [968000, 952138]
+    },
+    {
+      "name": ["노멀 벨룸", "Vellum"],
+      "data": [968000, 952138]
+    },
+    {
+      "name": ["노멀 혼테일", "Horntail"],
+      "data": [1012500, 995909]
+    },
+    {
+      "name": ["이지 반레온", "VonLeon"],
+      "data": [1058000, 1040663]
+    },
+    {
+      "name": ["이지 아카이럼", "Arkarium"],
+      "data": [1152000, 1133123]
+    },
+    {
+      "name": ["카웅", "Kaung"],
+      "data": [1250000, 1229517]
+    },
+    {
+      "name": ["카오스 혼테일", "Horntail"],
+      "data": [1352000, 1329845]
+    },
+    {
+      "name": ["노멀 핑크빈", "PinkBean"],
+      "data": [1404500, 1381485]
+    },
+    {
+      "name": ["노멀 반 레온", "VonLeon"],
+      "data": [1458000, 1434108]
+    },
+    {
+      "name": ["하드 반 레온", "VonLeon"],
+      "data": [2450000, 2409853]
+    },
+    {
+      "name": ["노멀 아카이럼", "Arkarium"],
+      "data": [2520000, 2479198]
+    },
+    {
+      "name": ["노멀 매그너스", "Magnus"],
+      "data": [2592000, 2549526]
+    },
+    {
+      "name": ["노멀 파풀라투스", "Papulatus"],
+      "data": [2664500, 2620838]
+    }
+  ],
+  [
+    {
+      "name": ["이지 시그너스", "Cygnus"],
+      "image": "image/background/Cygnus.png",
+      "data": []
+    },
+    {
+      "name": ["하드 힐라", "Hilla"],
+      "data": []
+    }
+  ]
 ]
