@@ -19,8 +19,22 @@
     <title>결정석 차트</title>
   </head>
   <body>
-    <p>제목 나눔 스퀘어, 본문 노토 산스로 하기</p>
-    <div><canvas id="req"></canvas></div>
+    <header>
+      <div class="box switch" id="size">
+        <div><p>작게</p></div>
+        <p>크게</p>
+      </div>
+      <div class="box switch" id="tie">
+        <div><p>개별</p></div>
+        <p>묶음</p>
+      </div>
+    </header>
+    <section>
+      <div class="card">
+        <div class="box card-title"></div>
+        <div class="box card-chart"><canvas></canvas></div>
+      </div>
+    </section>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="main.js"></script>
   </body>
