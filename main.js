@@ -27,6 +27,23 @@ function NumberToCommasStr(num) {
   return str;
 }
 function SetChartFromDateJson() {
+  // 목요일 30개 넣기
+  let thursday = new Date(),
+    labels = [];
+  if (thursday.getDay() > 4) thursday.setDate(thursday.getDate() - thursday.getDay());
+  else if (thursday.getDay() < 4) thursday.setDate(thursday.getDate() - thursday.getDay() - 3);
+
+  while (labels.length < 30) {
+    labels.push(
+      `${thursday.getMonth() < 9 ? "0" : ""}${thursday.getMonth() + 1}/${
+        thursday.getDate() < 10 ? "0" : ""
+      }${thursday.getDate()}`
+    );
+    thursday.setDate(thursday.getDate() - 7);
+  }
+  labels.reverse();
+
+  // 데이터 받아오기
   fetch("data.json")
     .then((res) => res.json())
     .then((date, idx) => {
@@ -71,6 +88,47 @@ function SetChartFromDateJson() {
           l.innerText = changeStrArr.join(" ");
 
           // 차트 추가
+          thursday.setDate(thursday.getDate() - 7 * info.data.length);
+          new Chart(canvas.getContext("2d"), {
+            type: "line",
+            data: {
+              labels: labels.slice(labels.length - info.data.length),
+              datasets: [
+                {
+                  label: info.name[0],
+                  data: info.data,
+                  backgroundColor: "rgba(52, 152, 219, 0.2)",
+                  borderColor: "rgb(52, 152, 219)",
+                },
+              ],
+            },
+            options: {
+              maintainAspectRatio: false,
+
+              elements: {
+                point: {
+                  radius: 0,
+                },
+              },
+              scales: {
+                x: {
+                  grid: {
+                    color: "rgba(0, 0, 0, 0.1)",
+                  },
+                },
+                y: {
+                  grid: {
+                    color: "rgba(0, 0, 0, 0.1)",
+                  },
+                  beginAtZero: true,
+                },
+              },
+              interaction: {
+                mode: "index",
+                intersect: false,
+              },
+            },
+          });
 
           // 본문에 추가
           section.appendChild(newCard);
