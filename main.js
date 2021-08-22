@@ -78,12 +78,17 @@ function SetChartFromDateJson() {
           let changeStrArr = [NumberToCommasStr(Math.abs(cur - last))];
           changeStrArr.push(`(${Math.round((cur / last - 1) * 10000) / 100}%)`);
 
+          let backgroundColor, borderColor;
           if (cur < last) {
             title.classList.add("lower");
             changeStrArr.splice(0, 0, "▼");
+            backgroundColor = "rgba(52, 152, 219, 0.2)";
+            borderColor = "rgb(52, 152, 219)";
           } else if (cur > last) {
             title.classList.add("upper");
             changeStrArr.splice(0, 0, "▲");
+            backgroundColor = "rgba(231, 76, 60, 0.2)";
+            borderColor = "rgb(231, 76, 60)";
           }
           l.innerText = changeStrArr.join(" ");
 
@@ -97,8 +102,8 @@ function SetChartFromDateJson() {
                 {
                   label: info.name[0],
                   data: info.data,
-                  backgroundColor: "rgba(52, 152, 219, 0.2)",
-                  borderColor: "rgb(52, 152, 219)",
+                  ...backgroundColor,
+                  ...borderColor,
                 },
               ],
             },
