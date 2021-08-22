@@ -20,7 +20,6 @@ p {
 
 .box {
   padding: 1rem;
-  margin-bottom: 2rem;
   background-color: #fff;
   border-radius: 0.5rem;
   box-shadow: rgb(0 0 0 / 10%) 0px 4px 16px 0px;
@@ -69,16 +68,24 @@ header > div:not(:last-child) {
   margin-right: 2rem;
 }
 
+section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+}
 section > h1 {
   display: inline-block;
   font-size: 2rem;
-  margin-top: 1rem;
-  padding: 1rem;
+  margin: 1rem 60% 0 0;
+  padding: 2rem 0 0 1rem;
 }
 
 .card {
   display: flex;
   gap: 1rem;
+
+  width: calc(50% - 1rem);
 }
 .card-title {
   display: flex;
@@ -111,9 +118,11 @@ section > h1 {
   flex: 1;
   height: 110px;
 }
-.card-chart > canvas {
-  width: 100%;
-  height: 100%;
+
+@media (max-width: 1600px) {
+  .card {
+    width: 100%;
+  }
 }
 
 /******************** Mobile ********************/
@@ -122,6 +131,14 @@ section > h1 {
     padding: 1rem;
   }
 
+  header > div:not(:last-child) {
+    margin-right: 1rem;
+  }
+
+  section > h1 {
+    margin-right: 0;
+    padding: 0 0 0 1rem;
+  }
   .card {
     flex-direction: column;
   }

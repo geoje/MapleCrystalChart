@@ -52,7 +52,6 @@ function SetChartFromDateJson() {
         const dateElement = document.createElement("h1");
         dateElement.innerText = ["일간 보스", "주간 보스", "월간 보스"][idx];
         dateElement.id = ["daily", "weekly", "monthly"][idx];
-        dateElement.classList.add("box");
         section.appendChild(dateElement);
 
         // 보스 정보 추가
@@ -78,7 +77,8 @@ function SetChartFromDateJson() {
           let changeStrArr = [NumberToCommasStr(Math.abs(cur - last))];
           changeStrArr.push(`(${Math.round((cur / last - 1) * 10000) / 100}%)`);
 
-          let backgroundColor, borderColor;
+          let backgroundColor = "rgba(127, 140, 141, 0.2)";
+          let borderColor = "rgb(127, 140, 141)";
           if (cur < last) {
             title.classList.add("lower");
             changeStrArr.splice(0, 0, "▼");
@@ -102,14 +102,13 @@ function SetChartFromDateJson() {
                 {
                   label: info.name[0],
                   data: info.data,
-                  ...backgroundColor,
-                  ...borderColor,
+                  backgroundColor: backgroundColor,
+                  borderColor: borderColor,
                 },
               ],
             },
             options: {
               maintainAspectRatio: false,
-
               elements: {
                 point: {
                   radius: 0,
