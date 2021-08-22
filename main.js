@@ -34,6 +34,7 @@ function SetChartFromDateJson() {
         // 본문에 기간별 추가
         const dateElement = document.createElement("h1");
         dateElement.innerText = ["일간 보스", "주간 보스", "월간 보스"][idx];
+        dateElement.id = ["daily", "weekly", "monthly"][idx];
         dateElement.classList.add("box");
         section.appendChild(dateElement);
 
@@ -43,7 +44,7 @@ function SetChartFromDateJson() {
           const title = newCard.querySelector(".card-title");
 
           const img = newCard.querySelector("img");
-          const h = newCard.querySelector("h3");
+          const h = newCard.querySelector("h1");
           const p = newCard.querySelector("p");
           const l = newCard.querySelector("l");
           const canvas = newCard.querySelector("canvas");
