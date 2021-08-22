@@ -1,9 +1,37 @@
 [
   {
     "name": "이지 자쿰",
-    "icon": "",
-    "image": "image/icon/Zakum.png",
+    "icon": "image/icon/Zakum.png",
+    "image": "image/background/Zakum.png",
     "labels": ["8/12", "8/19"],
     "data": [200000, 196723]
+  },
+  {
+    "name": "노멀 자쿰",
+    "icon": "image/icon/Papulatus.png",
+    "image": "image/background/Papulatus.png",
+    "labels": ["8/12", "8/19"],
+    "data": [612500, 602463]
+  },
+  {
+    "name": "이지 파풀라투스",
+    "icon": "image/icon/Zakum.png",
+    "image": "image/background/Zakum.png",
+    "labels": ["8/12", "8/19"],
+    "data": [684500, 673283]
+  },
+  {
+    "name": "이지 매그너스",
+    "icon": "image/icon/Magnus.png",
+    "image": "image/background/Magnus.png",
+    "labels": ["8/12", "8/19"],
+    "data": [722000, 710169]
+  },
+  {
+    "name": "노멀 힐라",
+    "icon": "image/icon/Hilla.png",
+    "image": "image/background/Hilla.png",
+    "labels": ["8/12", "8/19"],
+    "data": [800000, 786891]
   }
 ]

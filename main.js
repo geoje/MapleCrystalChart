@@ -1,4 +1,7 @@
 function Main() {
+  // 차트 세팅
+  SetChartFromDateJson();
+
   // 크기 버튼
   SetSwitchEvent(
     "size",
@@ -14,6 +17,11 @@ function Main() {
   );
 }
 
+function SetChartFromDateJson() {
+  fetch("data.json")
+    .then((res) => res.json())
+    .then((arr) => data.forEach((e) => {}));
+}
 function SetSwitchEvent(id, leftEvent, rightEvent) {
   const sw = document.getElementById(id);
   const [left, right] = sw.querySelectorAll("p");
