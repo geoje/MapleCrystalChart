@@ -106,7 +106,6 @@ body.desc > h1#monthly {
 }
 section {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
 }
