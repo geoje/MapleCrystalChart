@@ -95,15 +95,7 @@ body > h1 {
   font-size: 2rem;
   margin: 1rem 0 0 1rem;
 }
-body.desc > h1#daily {
-  order: 5;
-}
-body.desc > h1#weekly {
-  order: 3;
-}
-body.desc > h1#monthly {
-  order: 1;
-}
+
 section {
   display: flex;
   flex-wrap: wrap;
@@ -113,15 +105,6 @@ section .group-chart {
   box-sizing: border-box;
   display: none;
   width: 100%;
-}
-body.desc > section.daily {
-  order: 6;
-}
-body.desc > section.weekly {
-  order: 4;
-}
-body.desc > section.monthly {
-  order: 2;
 }
 
 .card {
@@ -137,9 +120,6 @@ body.desc > section.monthly {
   align-items: center;
 
   width: 200px;
-}
-body.card-title-hide .card-title {
-  display: none;
 }
 .card-title > div {
   display: flex;
@@ -164,6 +144,61 @@ body.card-title-hide .card-title {
   flex: 1;
   height: 110px;
 }
+
+aside {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  right: 2rem;
+  bottom: 2rem;
+}
+aside > a.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 1.6rem;
+  height: 1.6rem;
+
+  border: rgb(0 0 0 / 8%) 1px solid;
+  border-radius: 100%;
+  font-size: small;
+  color: rgba(44, 62, 80, 0.8);
+  background-color: rgb(255 255 255 / 40%);
+  text-decoration: none;
+
+  transition: color 0.2s, background-color 0.2s, border 0.2s;
+}
+aside > a.box:hover {
+  border: rgb(0 0 0 / 16%) 1px solid;
+  color: rgb(44, 62, 80);
+  background-color: #fff;
+}
+
+body.desc > h1#daily {
+  order: 5;
+}
+body.desc > h1#weekly {
+  order: 3;
+}
+body.desc > h1#monthly {
+  order: 1;
+}
+body.desc > section.daily {
+  order: 6;
+}
+body.desc > section.weekly {
+  order: 4;
+}
+body.desc > section.monthly {
+  order: 2;
+}
+
+body.group > section {
+  justify-content: center;
+}
 body.group .group-chart {
   display: block;
 }
@@ -171,6 +206,10 @@ body.group .card {
   width: auto;
 }
 body.group .card-chart {
+  display: none;
+}
+
+body.card-title-hide .card-title {
   display: none;
 }
 
@@ -210,5 +249,10 @@ body.group .card-chart {
     gap: 1rem;
     width: 100%;
     margin: 0;
+  }
+
+  aside {
+    right: 1rem;
+    bottom: 1rem;
   }
 }
