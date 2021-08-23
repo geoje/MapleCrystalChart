@@ -1,9 +1,13 @@
-const section = document.querySelector("section");
-const card = document.querySelector(".card");
-let dateHeaders = [];
+const body = document.querySelector("body");
+const sections = document.querySelectorAll("body > section");
+const headers = document.querySelectorAll("body > h1");
+let cardTemplate;
 let cards = [[], [], []];
 
 function Main() {
+  // 템플릿 세팅
+  cardTemplate = CreateCardElement();
+
   // 차트 세팅
   SetChartFromDateJson();
 
@@ -18,18 +22,10 @@ function Main() {
   SetSwitchEvent(
     "order",
     () => {
-      dateHeaders.forEach((e, i) => {
-        e.removeAttribute("style");
-        cards[i].forEach((c) => c.removeAttribute("style"));
-      });
+      body.classList.remove("desc");
     },
     () => {
-      dateHeaders.forEach((e, i) => {
-        let order = (dateHeaders.length - i) * 100;
-        e.style.order = order;
-        order += cards[i].length;
-        cards[i].forEach((c, j) => (c.style.order = order--));
-      });
+      body.classList.add("desc");
     }
   );
 }
@@ -39,6 +35,27 @@ function NumberToCommasStr(num) {
   const rgx = /(\d+)(\d{3})/;
   while (rgx.test(str)) str = str.replace(rgx, "$1,$2");
   return str;
+}
+function CreateCardElement() {
+  const card = document.createElement("div");
+  const cardTitle = document.createElement("div");
+  const cardChart = document.createElement("div");
+
+  card.classList.add("card");
+  cardTitle.classList.add("box");
+  cardChart.classList.add("box");
+  cardTitle.classList.add("card-title");
+  cardChart.classList.add("card-chart");
+
+  const titles = [document.createElement("div"), document.createElement("div")];
+  titles[0].append(document.createElement("img"), document.createElement("h1"));
+  titles[1].append(document.createElement("p"), document.createElement("l"));
+  cardTitle.append(titles[0], titles[1]);
+  cardChart.append(document.createElement("canvas"));
+
+  card.append(cardTitle, cardChart);
+
+  return card;
 }
 function SetChartFromDateJson() {
   // 목요일 30개 넣기
@@ -62,28 +79,20 @@ function SetChartFromDateJson() {
   // 데이터 받아오기
   fetch("data.json")
     .then((res) => res.json())
-    .then((date, idx) => {
-      date.forEach((infos, idx) => {
-        // 본문에 기간별 추가
-        const dateElement = document.createElement("h1");
-        dateElement.innerText = ["일간 보스", "주간 보스", "월간 보스"][idx];
-        dateElement.id = ["daily", "weekly", "monthly"][idx];
-        section.appendChild(dateElement);
-        dateHeaders.push(dateElement);
-
+    .then((date) => {
+      date.forEach((infos, i) => {
         // 보스 정보 추가
         infos.forEach((info) => {
-          const newCard = card.cloneNode(true);
-          const title = newCard.querySelector(".card-title");
+          const card = cardTemplate.cloneNode(true);
+          const title = card.querySelector(".card-title");
 
-          const img = newCard.querySelector("img");
-          const h = newCard.querySelector("h1");
-          const p = newCard.querySelector("p");
-          const l = newCard.querySelector("l");
-          const canvas = newCard.querySelector("canvas");
+          const img = card.querySelector("img");
+          const h = card.querySelector("h1");
+          const p = card.querySelector("p");
+          const l = card.querySelector("l");
+          const canvas = card.querySelector("canvas");
 
           // 정보 입력
-          newCard.removeAttribute("style");
           img.src = `image/icon/${info.name[1]}.png`;
           h.innerText = info.name[0];
           p.innerText = NumberToCommasStr(info.data[info.data.length - 1]);
@@ -152,8 +161,8 @@ function SetChartFromDateJson() {
           });
 
           // 본문에 추가
-          section.appendChild(newCard);
-          cards[idx].push(newCard);
+          sections[i].appendChild(card);
+          cards[i].push(card);
         });
       });
     });

@@ -1,6 +1,9 @@
 body {
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   padding: 2rem;
+  margin: 0;
 
   background-color: rgb(248, 248, 248);
   font-family: "Noto Sans KR", sans-serif;
@@ -68,17 +71,36 @@ header > div:not(:last-child) {
   margin-right: 2rem;
 }
 
+body > h1 {
+  display: inline-block;
+  font-size: 2rem;
+  margin: 1rem 0 0 1rem;
+}
+body.desc > h1#daily {
+  order: 5;
+}
+body.desc > h1#weekly {
+  order: 3;
+}
+body.desc > h1#monthly {
+  order: 1;
+}
 section {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-  margin-top: 2rem;
 }
-section > h1 {
-  display: inline-block;
-  font-size: 2rem;
-  margin: 1rem 60% 0 0;
-  padding: 2rem 0 0 1rem;
+body.desc > section {
+  flex-direction: row-reverse;
+}
+body.desc > section.daily {
+  order: 6;
+}
+body.desc > section.weekly {
+  order: 4;
+}
+body.desc > section.monthly {
+  order: 2;
 }
 
 .card {
@@ -120,6 +142,9 @@ section > h1 {
 }
 
 @media (max-width: 1600px) {
+  body.desc > section {
+    flex-direction: column-reverse;
+  }
   .card {
     width: 100%;
   }
@@ -135,7 +160,7 @@ section > h1 {
     margin-right: 1rem;
   }
 
-  section > h1 {
+  body > h1 {
     margin-right: 0;
     padding: 0 0 0 1rem;
   }
