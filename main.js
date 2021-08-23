@@ -48,7 +48,8 @@ function Main() {
       body.classList.remove("card-title-hide");
       charts.single.forEach((set) =>
         set.forEach((chart) => {
-          chart.resize(chart.width - 300, chart.height);
+          if (window.screen.width > 800)
+            chart.resize(chart.width - 300, chart.height);
         })
       );
     },

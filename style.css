@@ -83,6 +83,8 @@ p {
 
 header {
   display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 header > div:not(:last-child) {
   margin-right: 2rem;
@@ -184,8 +186,14 @@ body.group .card-chart {
     padding: 1rem;
   }
 
+  header {
+    gap: 1rem;
+  }
+  header > .switch {
+    width: calc(50% - 0.5rem);
+  }
   header > div:not(:last-child) {
-    margin-right: 1rem;
+    margin: 0;
   }
 
   body > h1 {
