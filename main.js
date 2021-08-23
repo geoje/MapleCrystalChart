@@ -1,5 +1,7 @@
 const section = document.querySelector("section");
 const card = document.querySelector(".card");
+let dateHeaders = [];
+let cards = [[], [], []];
 
 function Main() {
   // 차트 세팅
@@ -15,8 +17,20 @@ function Main() {
   // 정렬 버튼
   SetSwitchEvent(
     "order",
-    () => {},
-    () => {}
+    () => {
+      dateHeaders.forEach((e, i) => {
+        e.removeAttribute("style");
+        cards[i].forEach((c) => c.removeAttribute("style"));
+      });
+    },
+    () => {
+      dateHeaders.forEach((e, i) => {
+        let order = (dateHeaders.length - i) * 100;
+        e.style.order = order;
+        order += cards[i].length;
+        cards[i].forEach((c, j) => (c.style.order = order--));
+      });
+    }
   );
 }
 
@@ -30,8 +44,10 @@ function SetChartFromDateJson() {
   // 목요일 30개 넣기
   let thursday = new Date(),
     labels = [];
-  if (thursday.getDay() > 4) thursday.setDate(thursday.getDate() - thursday.getDay());
-  else if (thursday.getDay() < 4) thursday.setDate(thursday.getDate() - thursday.getDay() - 3);
+  if (thursday.getDay() > 4)
+    thursday.setDate(thursday.getDate() - thursday.getDay());
+  else if (thursday.getDay() < 4)
+    thursday.setDate(thursday.getDate() - thursday.getDay() - 3);
 
   while (labels.length < 30) {
     labels.push(
@@ -53,6 +69,7 @@ function SetChartFromDateJson() {
         dateElement.innerText = ["일간 보스", "주간 보스", "월간 보스"][idx];
         dateElement.id = ["daily", "weekly", "monthly"][idx];
         section.appendChild(dateElement);
+        dateHeaders.push(dateElement);
 
         // 보스 정보 추가
         infos.forEach((info) => {
@@ -136,6 +153,7 @@ function SetChartFromDateJson() {
 
           // 본문에 추가
           section.appendChild(newCard);
+          cards[idx].push(newCard);
         });
       });
     });
