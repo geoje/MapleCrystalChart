@@ -280,6 +280,7 @@ function SetChartFromDateJson() {
       });
     });
 
+  // 모바일 환경 단일 모드 차트 높이 지정
   setTimeout(() => {
     if (body.classList.contains("group") || !isMobile()) return;
 
