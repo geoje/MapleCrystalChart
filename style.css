@@ -111,6 +111,7 @@ section {
   gap: 2rem;
 }
 section .group-chart {
+  box-sizing: border-box;
   display: none;
   width: 100%;
 }

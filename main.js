@@ -18,8 +18,22 @@ function Main() {
   // 묶음 버튼
   SetSwitchEvent(
     "tie",
-    () => body.classList.remove("group"),
-    () => body.classList.add("group")
+    () => {
+      body.classList.remove("group");
+      charts.single.forEach((set) =>
+        set.forEach((chart) => {
+          chart.resize(chart.width, 110);
+        })
+      );
+    },
+    () => {
+      body.classList.add("group");
+      charts.group.forEach((set) =>
+        set.forEach((chart) => {
+          chart.resize(chart.width, 400);
+        })
+      );
+    }
   );
 
   // 정렬 버튼
@@ -48,8 +62,7 @@ function Main() {
       body.classList.remove("card-title-hide");
       charts.single.forEach((set) =>
         set.forEach((chart) => {
-          if (window.screen.width > 800)
-            chart.resize(chart.width - 300, chart.height);
+          if (!isMobile()) chart.resize(chart.width - 300, chart.height);
         })
       );
     },
@@ -59,6 +72,9 @@ function Main() {
   );
 }
 
+function isMobile() {
+  return window.screen.width <= 800;
+}
 function NumberToCommasStr(num) {
   let str = String(num);
   const rgx = /(\d+)(\d{3})/;
@@ -104,6 +120,12 @@ function SetChartFromDateJson() {
     thursday.setDate(thursday.getDate() - 7);
   }
   labels.reverse();
+
+  // 차트 기본값 세팅
+  Chart.defaults.plugins.legend = false;
+  Chart.defaults.interaction.mode = "index";
+  Chart.defaults.interaction.intersect = false;
+  Chart.defaults.maintainAspectRatio = false;
 
   // 데이터 받아오기
   fetch("data.json")
@@ -156,6 +178,7 @@ function SetChartFromDateJson() {
             data: info.data,
             backgroundColor: backgroundColor,
             borderColor: borderColor,
+            borderWidth: 1,
           };
           groupDatasets.push(dataset);
           charts.single[i].push(
@@ -166,7 +189,6 @@ function SetChartFromDateJson() {
                 datasets: [dataset],
               },
               options: {
-                maintainAspectRatio: false,
                 elements: {
                   point: {
                     radius: 0,
@@ -184,10 +206,6 @@ function SetChartFromDateJson() {
                     },
                     beginAtZero: true,
                   },
-                },
-                interaction: {
-                  mode: "index",
-                  intersect: false,
                 },
               },
             })
@@ -218,7 +236,6 @@ function SetChartFromDateJson() {
                 datasets: datasets,
               },
               options: {
-                maintainAspectRatio: false,
                 elements: {
                   point: {
                     radius: 0,
@@ -237,16 +254,17 @@ function SetChartFromDateJson() {
                     beginAtZero: true,
                   },
                 },
-                interaction: {
-                  mode: "index",
-                  intersect: false,
-                },
               },
             })
           )
         );
       });
     });
+
+  // 차트 초기 사이즈 렌더링
+  window.addEventListener("load", function (event) {
+    console.log("All resources finished loading!");
+  });
 }
 function SetSwitchEvent(id, leftEvent, rightEvent) {
   const sw = document.getElementById(id);
