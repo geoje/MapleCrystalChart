@@ -13,6 +13,9 @@
     url("font/NotoSansKR-Regular.subset.otf") format("otf");
 }
 
+html {
+  scroll-behavior: smooth;
+}
 body {
   display: flex;
   flex-direction: column;
