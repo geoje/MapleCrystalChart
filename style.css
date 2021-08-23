@@ -136,6 +136,9 @@ body.desc > section.monthly {
 
   width: 200px;
 }
+body.card-title-hide .card-title {
+  display: none;
+}
 .card-title > div {
   display: flex;
   flex-direction: column;

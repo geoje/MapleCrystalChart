@@ -3,6 +3,10 @@ const sections = document.querySelectorAll("body > section");
 const headers = document.querySelectorAll("body > h1");
 let cardTemplate;
 let cards = [[], [], []];
+let charts = {
+  single: [[], [], []],
+  group: [[], [], []],
+};
 
 function Main() {
   // 템플릿 세팅
@@ -34,6 +38,22 @@ function Main() {
           card.style.order = set.length - j;
         });
       });
+    }
+  );
+
+  // 숨기기 버튼
+  SetSwitchEvent(
+    "tile",
+    () => {
+      body.classList.remove("card-title-hide");
+      charts.single.forEach((set) =>
+        set.forEach((chart) => {
+          chart.resize(chart.width - 300, chart.height);
+        })
+      );
+    },
+    () => {
+      body.classList.add("card-title-hide");
     }
   );
 }
@@ -137,38 +157,40 @@ function SetChartFromDateJson() {
             borderColor: borderColor,
           };
           groupDatasets.push(dataset);
-          new Chart(canvas.getContext("2d"), {
-            type: "line",
-            data: {
-              labels: labels.slice(labels.length - info.data.length),
-              datasets: [dataset],
-            },
-            options: {
-              maintainAspectRatio: false,
-              elements: {
-                point: {
-                  radius: 0,
-                },
+          charts.single[i].push(
+            new Chart(canvas.getContext("2d"), {
+              type: "line",
+              data: {
+                labels: labels.slice(labels.length - info.data.length),
+                datasets: [dataset],
               },
-              scales: {
-                x: {
-                  grid: {
-                    color: "rgba(0, 0, 0, 0.1)",
+              options: {
+                maintainAspectRatio: false,
+                elements: {
+                  point: {
+                    radius: 0,
                   },
                 },
-                y: {
-                  grid: {
-                    color: "rgba(0, 0, 0, 0.1)",
+                scales: {
+                  x: {
+                    grid: {
+                      color: "rgba(0, 0, 0, 0.1)",
+                    },
                   },
-                  beginAtZero: true,
+                  y: {
+                    grid: {
+                      color: "rgba(0, 0, 0, 0.1)",
+                    },
+                    beginAtZero: true,
+                  },
+                },
+                interaction: {
+                  mode: "index",
+                  intersect: false,
                 },
               },
-              interaction: {
-                mode: "index",
-                intersect: false,
-              },
-            },
-          });
+            })
+          );
 
           // 본문에 추가
           sections[i].appendChild(card);
@@ -183,12 +205,11 @@ function SetChartFromDateJson() {
             groupDatasets.slice(0, groupDatasets.length / 2),
             groupDatasets.slice(groupDatasets.length / 2, groupDatasets.length),
           ];
-          console.log(canvasArr);
         }
 
         // 그룹 차트 입력
-        datasetsArr.forEach(
-          (datasets, dsIdx) =>
+        datasetsArr.forEach((datasets, dsIdx) =>
+          charts.group[i].push(
             new Chart(canvasArr[dsIdx].getContext("2d"), {
               type: "line",
               data: {
@@ -221,6 +242,7 @@ function SetChartFromDateJson() {
                 },
               },
             })
+          )
         );
       });
     });
