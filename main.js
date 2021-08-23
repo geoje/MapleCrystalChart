@@ -14,12 +14,8 @@ function Main() {
   // 묶음 버튼
   SetSwitchEvent(
     "tie",
-    () => {
-      body.classList.remove("group");
-    },
-    () => {
-      body.classList.add("group");
-    }
+    () => body.classList.remove("group"),
+    () => body.classList.add("group")
   );
 
   // 정렬 버튼
@@ -27,9 +23,17 @@ function Main() {
     "order",
     () => {
       body.classList.remove("desc");
+      cards.forEach((set) =>
+        set.forEach((card) => card.removeAttribute("style"))
+      );
     },
     () => {
       body.classList.add("desc");
+      cards.forEach((set) => {
+        set.forEach((card, j) => {
+          card.style.order = set.length - j;
+        });
+      });
     }
   );
 }
@@ -85,7 +89,9 @@ function SetChartFromDateJson() {
     .then((res) => res.json())
     .then((date) => {
       date.forEach((infos, i) => {
-        // 보스 정보 추가
+        let groupDatasets = [];
+
+        // 개별 차트 입력
         infos.forEach((info) => {
           const card = cardTemplate.cloneNode(true);
           const title = card.querySelector(".card-title");
@@ -124,18 +130,18 @@ function SetChartFromDateJson() {
 
           // 차트 추가
           thursday.setDate(thursday.getDate() - 7 * info.data.length);
+          const dataset = {
+            label: info.name[0],
+            data: info.data,
+            backgroundColor: backgroundColor,
+            borderColor: borderColor,
+          };
+          groupDatasets.push(dataset);
           new Chart(canvas.getContext("2d"), {
             type: "line",
             data: {
               labels: labels.slice(labels.length - info.data.length),
-              datasets: [
-                {
-                  label: info.name[0],
-                  data: info.data,
-                  backgroundColor: backgroundColor,
-                  borderColor: borderColor,
-                },
-              ],
+              datasets: [dataset],
             },
             options: {
               maintainAspectRatio: false,
@@ -168,6 +174,54 @@ function SetChartFromDateJson() {
           sections[i].appendChild(card);
           cards[i].push(card);
         });
+
+        let canvasArr = sections[i].querySelectorAll(".group-chart > canvas");
+        let datasetsArr = [groupDatasets];
+        // 주간일 때 차트 2개로 나누기
+        if (i == 1) {
+          datasetsArr = [
+            groupDatasets.slice(0, groupDatasets.length / 2),
+            groupDatasets.slice(groupDatasets.length / 2, groupDatasets.length),
+          ];
+          console.log(canvasArr);
+        }
+
+        // 그룹 차트 입력
+        datasetsArr.forEach(
+          (datasets, dsIdx) =>
+            new Chart(canvasArr[dsIdx].getContext("2d"), {
+              type: "line",
+              data: {
+                labels: labels.slice(labels.length - datasets[0].data.length),
+                datasets: datasets,
+              },
+              options: {
+                maintainAspectRatio: false,
+                elements: {
+                  point: {
+                    radius: 0,
+                  },
+                },
+                scales: {
+                  x: {
+                    grid: {
+                      color: "rgba(0, 0, 0, 0.1)",
+                    },
+                  },
+                  y: {
+                    grid: {
+                      color: "rgba(0, 0, 0, 0.1)",
+                    },
+                    beginAtZero: true,
+                  },
+                },
+                interaction: {
+                  mode: "index",
+                  intersect: false,
+                },
+              },
+            })
+        );
       });
     });
 }
