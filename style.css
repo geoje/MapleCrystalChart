@@ -1,3 +1,18 @@
+@font-face {
+  font-family: "NanumSquare";
+  font-weight: 700;
+  src: url("font/NanumSquareB.subset.woff2") format("woff2"),
+    url("font/NanumSquareB.subset.woff") format("woff"),
+    url("font/NanumSquareB.subset.otf") format("otf");
+}
+@font-face {
+  font-family: "Noto Sans KR";
+  font-weight: 400;
+  src: url("font/NotoSansKR-Regular.subset.woff2") format("woff2"),
+    url("font/NotoSansKR-Regular.subset.woff") format("woff"),
+    url("font/NotoSansKR-Regular.subset.otf") format("otf");
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -7,6 +22,7 @@ body {
 
   background-color: rgb(248, 248, 248);
   font-family: "Noto Sans KR", sans-serif;
+  font-display: swap;
 }
 h1,
 h2,
@@ -16,6 +32,7 @@ h5,
 h6 {
   margin: 0;
   font-family: "NanumSquare", sans-serif;
+  font-display: swap;
 }
 p {
   margin: 0;

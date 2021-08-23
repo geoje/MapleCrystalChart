@@ -185,4 +185,31 @@ function SetSwitchEvent(id, leftEvent, rightEvent) {
   });
 }
 
+function GetAllTextHeader(str = " ") {
+  const addStr = (s) => {
+    for (let i = 0; i < s.length; i++) if (str.indexOf(s[i]) == -1) str += s[i];
+  };
+
+  headers.forEach((e) => addStr(e.innerText));
+  cards.forEach((set) =>
+    set.forEach((e) => addStr(e.querySelector("h1").innerText))
+  );
+
+  return str;
+}
+function GetAllTextContent() {
+  let str = GetAllTextHeader(" 1234567890,./:-%");
+
+  const addStr = (s) => {
+    for (let i = 0; i < s.length; i++) if (str.indexOf(s[i]) == -1) str += s[i];
+  };
+
+  document
+    .querySelector("header")
+    .querySelectorAll("p")
+    .forEach((e) => addStr(e.innerText));
+
+  return str;
+}
+
 Main();
