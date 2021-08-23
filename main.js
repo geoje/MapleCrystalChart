@@ -14,8 +14,12 @@ function Main() {
   // 묶음 버튼
   SetSwitchEvent(
     "tie",
-    () => {},
-    () => {}
+    () => {
+      body.classList.remove("group");
+    },
+    () => {
+      body.classList.add("group");
+    }
   );
 
   // 정렬 버튼
@@ -185,6 +189,7 @@ function SetSwitchEvent(id, leftEvent, rightEvent) {
   });
 }
 
+// For Light Weight Fonts
 function GetAllTextHeader(str = " ") {
   const addStr = (s) => {
     for (let i = 0; i < s.length; i++) if (str.indexOf(s[i]) == -1) str += s[i];

@@ -104,8 +104,14 @@ body.desc > h1#monthly {
 }
 section {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
+}
+section > div {
+  display: none;
+  width: 100%;
+  order: -1;
 }
 body.desc > section {
   flex-direction: row-reverse;
@@ -156,6 +162,15 @@ body.desc > section.monthly {
 .card-chart {
   flex: 1;
   height: 110px;
+}
+body.group > section > div > canvas {
+  display: block;
+}
+body.group .card {
+  width: auto;
+}
+body.group .card-chart {
+  display: none;
 }
 
 @media (max-width: 1600px) {
