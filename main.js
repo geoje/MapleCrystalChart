@@ -41,9 +41,7 @@ function Main() {
     "order",
     () => {
       body.classList.remove("desc");
-      cards.forEach((set) =>
-        set.forEach((card) => card.removeAttribute("style"))
-      );
+      cards.forEach((set) => set.forEach((card) => card.removeAttribute("style")));
     },
     () => {
       body.classList.add("desc");
@@ -65,9 +63,23 @@ function Main() {
           if (!isMobile()) chart.resize(chart.width - 300, chart.height);
         })
       );
+      for (type in charts)
+        charts[type].forEach((set) =>
+          set.forEach((chart) => {
+            chart.options.plugins.legend.display = false;
+            chart.update();
+          })
+        );
     },
     () => {
       body.classList.add("card-title-hide");
+      for (type in charts)
+        charts[type].forEach((set) =>
+          set.forEach((chart) => {
+            chart.options.plugins.legend.display = true;
+            chart.update();
+          })
+        );
     }
   );
 }
@@ -106,10 +118,8 @@ function SetChartFromDateJson() {
   // 목요일 30개 넣기
   let thursday = new Date(),
     labels = [];
-  if (thursday.getDay() > 4)
-    thursday.setDate(thursday.getDate() - thursday.getDay());
-  else if (thursday.getDay() < 4)
-    thursday.setDate(thursday.getDate() - thursday.getDay() - 3);
+  if (thursday.getDay() > 4) thursday.setDate(thursday.getDate() - thursday.getDay());
+  else if (thursday.getDay() < 4) thursday.setDate(thursday.getDate() - thursday.getDay() - 3);
 
   while (labels.length < 30) {
     labels.push(
@@ -122,7 +132,6 @@ function SetChartFromDateJson() {
   labels.reverse();
 
   // 차트 기본값 세팅
-  Chart.defaults.plugins.legend = false;
   Chart.defaults.interaction.mode = "index";
   Chart.defaults.interaction.intersect = false;
   Chart.defaults.maintainAspectRatio = false;
@@ -194,6 +203,11 @@ function SetChartFromDateJson() {
                     radius: 0,
                   },
                 },
+                plugins: {
+                  legend: {
+                    display: false,
+                  },
+                },
                 scales: {
                   x: {
                     grid: {
@@ -241,6 +255,11 @@ function SetChartFromDateJson() {
                     radius: 0,
                   },
                 },
+                plugins: {
+                  legend: {
+                    display: false,
+                  },
+                },
                 scales: {
                   x: {
                     grid: {
@@ -261,10 +280,15 @@ function SetChartFromDateJson() {
       });
     });
 
-  // 차트 초기 사이즈 렌더링
-  window.addEventListener("load", function (event) {
-    console.log("All resources finished loading!");
-  });
+  setTimeout(() => {
+    if (body.classList.contains("group") || !isMobile()) return;
+
+    charts.single.forEach((set) =>
+      set.forEach((chart) => {
+        chart.resize(chart.width, 110);
+      })
+    );
+  }, 1000);
 }
 function SetSwitchEvent(id, leftEvent, rightEvent) {
   const sw = document.getElementById(id);
@@ -291,9 +315,7 @@ function GetAllTextHeader(str = " ") {
   };
 
   headers.forEach((e) => addStr(e.innerText));
-  cards.forEach((set) =>
-    set.forEach((e) => addStr(e.querySelector("h1").innerText))
-  );
+  cards.forEach((set) => set.forEach((e) => addStr(e.querySelector("h1").innerText)));
 
   return str;
 }
