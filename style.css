@@ -175,6 +175,7 @@ body.group .card-chart {
   display: none;
 }
 
+/******************** Tablet ********************/
 @media (max-width: 1600px) {
   .card {
     width: 100%;
