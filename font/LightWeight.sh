@@ -4,6 +4,7 @@ text="1234567890▼▲-+.% 단일그룹오름차순내림타보이기숨데터�
 for filename in "NanumSquareB.ttf" "NotoSansKR-Regular.otf"
 do
   filenameNoextension="${filename%.*}"
+  echo "[${filenameNoextension}]"
 
   pyftsubset "${filename}" \
     --output-file="${filenameNoextension}.subset.otf" \
@@ -19,6 +20,7 @@ do
     --drop-tables= \
     --name-IDs='*' \
     --name-languages='*'
+  echo "${filenameNoextension}.subset.otf"
 
   pyftsubset "${filename}" \
     --flavor="woff" \
@@ -36,6 +38,7 @@ do
     --drop-tables= \
     --name-IDs='*' \
     --name-languages='*'
+  echo "${filenameNoextension}.subset.woff"
 
   pyftsubset "${filename}" \
     --flavor="woff2" \
@@ -52,4 +55,6 @@ do
     --drop-tables= \
     --name-IDs='*' \
     --name-languages='*'
+  echo "${filenameNoextension}.subset.woff2"
+  echo ""
 done
