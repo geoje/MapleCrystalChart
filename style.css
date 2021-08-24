@@ -223,6 +223,9 @@ figure > div {
   display: flex;
   justify-content: space-between;
 }
+figure > div.modal-title {
+  padding: 0.5rem;
+}
 figure > div.modal-title > img {
   cursor: pointer;
 }
