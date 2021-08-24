@@ -1,6 +1,14 @@
 const body = document.querySelector("body");
 const sections = document.querySelectorAll("body > section");
-const headers = document.querySelectorAll("body > h1");
+const dateTitles = document.querySelectorAll("body > h1");
+const btnData = document.querySelector("#input-data");
+const layer = document.querySelector("div.layer");
+
+Element.prototype.setStyle = (styles) => {
+  for (var k in styles) this.style[k] = styles[k];
+  return this;
+};
+
 let cardTemplate;
 let cards = [[], [], []];
 let charts = {
@@ -82,6 +90,22 @@ function Main() {
         );
     }
   );
+
+  // 데이터 입력 버튼
+  btnData.addEventListener("click", () => ShowModal("modal-data"));
+}
+
+// For Light Weight Fonts
+function GetAllTextContent() {
+  let str = "1234567890▼▲-+.% ";
+
+  const addStr = (s) => {
+    for (let i = 0; i < s.length; i++) if (str.indexOf(s[i]) == -1) str += s[i];
+  };
+
+  document.querySelectorAll("h1, p, l, a, button").forEach((e) => addStr(e.innerHTML));
+
+  return str;
 }
 
 function isMobile() {
@@ -155,7 +179,7 @@ function SetChartFromDateJson() {
           const canvas = card.querySelector("canvas");
 
           // 정보 입력
-          img.src = `image/icon/${info.name[1]}.png`;
+          img.src = `image/boss-icon/${info.name[1]}.png`;
           h.innerText = info.name[0];
           p.innerText = NumberToCommasStr(info.data[info.data.length - 1]);
 
@@ -308,31 +332,30 @@ function SetSwitchEvent(id, leftEvent, rightEvent) {
     right.innerText = text;
   });
 }
+function ShowModal(id, submitEvent) {
+  const modal = document.getElementById(id);
+  const close = () => {
+    layer.classList.add("disabling");
+    modal.classList.add("disabling");
+    setTimeout(() => {
+      layer.classList.remove("disabling");
+      modal.classList.remove("disabling");
+      layer.classList.add("disable");
+      modal.classList.add("disable");
+    }, 200);
 
-// For Light Weight Fonts
-function GetAllTextHeader(str = " ") {
-  const addStr = (s) => {
-    for (let i = 0; i < s.length; i++) if (str.indexOf(s[i]) == -1) str += s[i];
+    layer.removeEventListener("click", close);
   };
 
-  headers.forEach((e) => addStr(e.innerText));
-  cards.forEach((set) => set.forEach((e) => addStr(e.querySelector("h1").innerText)));
+  layer.classList.remove("disable");
+  modal.classList.remove("disable");
 
-  return str;
-}
-function GetAllTextContent() {
-  let str = GetAllTextHeader(" 1234567890,./:-%");
+  // 닫기 이벤트
+  modal.querySelector(".modal-title img").addEventListener("click", close);
+  layer.addEventListener("click", close);
 
-  const addStr = (s) => {
-    for (let i = 0; i < s.length; i++) if (str.indexOf(s[i]) == -1) str += s[i];
-  };
-
-  document
-    .querySelector("header")
-    .querySelectorAll("p")
-    .forEach((e) => addStr(e.innerText));
-
-  return str;
+  /// 제출 버튼
+  modal.querySelector(".modal-submit button").addEventListener("click", submitEvent);
 }
 
 Main();

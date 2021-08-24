@@ -22,6 +22,7 @@
         <div><p>타일 보이기</p></div>
         <p>타일 숨기기</p>
       </div>
+      <button class="box" id="input-data">데이터 입력</button>
     </header>
     <h1 id="daily">일일 보스</h1>
     <section class="daily">
@@ -36,12 +37,31 @@
     <section class="monthly">
       <div class="box group-chart"><canvas style="height: 400px"></canvas></div>
     </section>
-    <aside>
+    <nav>
       <a href="#daily" class="box">일일</a>
       <a href="#weekly" class="box">주간</a>
       <a href="#monthly" class="box">월간</a>
-    </aside>
+    </nav>
+    <div class="layer disable"></div>
+    <figure class="box disable" id="modal-data">
+      <div class="modal-title">
+        <h1>데이터 입력</h1>
+        <img src="image/icon/close.svg" />
+      </div>
+      <div class="modal-content">
+        <img />
+        <button class="box">파일 선택</button>
+        <p>
+          이 곳에 콜렉터 NPC의 결정석 가격 이미지를 올려 주세요.<br />Ctrl + V 하여 클립보드에서
+          이미지 붙여넣기 또는 파일 선택을 할 수 있습니다.
+        </p>
+      </div>
+      <div class="modal-submit">
+        <button class="box">제출</button>
+      </div>
+    </figure>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js"></script>
     <script src="main.js"></script>
   </body>
 </html>
